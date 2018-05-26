@@ -24,7 +24,7 @@ SECTIONS {
   .text 0xFFFFFFFF80000000 : AT (0x100000 + SIZEOF(.boot))
   {
     *(.text)
-    . = ALIGN(4096);
+    . = ALIGN(2M);
   }
 
   .bss :
@@ -32,7 +32,7 @@ SECTIONS {
     *(.bss)
 
      *(COMMON)
-    . = ALIGN(4096);
+    . = ALIGN(2M);
   }
   
   __kern_en = (. - 0xFFFFFFFF80000000 + 0x100000 + SIZEOF(.boot));
