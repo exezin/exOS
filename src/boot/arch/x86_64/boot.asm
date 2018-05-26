@@ -191,7 +191,6 @@ stack_bottom:
 stack_top:
 
 
-
 section .rodata
 global gdt64
 global gdt64.data
@@ -201,22 +200,22 @@ gdt64:
   dw 0                         ; base low
   db 0                         ; base middle
   db 0                         ; access
-  db 1                         ; granularity
+  db 1                         ; granularity (4kb pages, 4GB total)
   db 0                         ; base high
   .code: equ $ - gdt64
   dw 0                         ; limit low
   dw 0                         ; base low
   db 0                         ; base middle
-  db 10011010b                 ; access
-  db 10101111b                 ; granularity
+  db 10011010b                 ; access (present, read, execute)
+  db 10101111b                 ; granularity (64bit, limit 16:19 is lower 4 bits)
   db 0                         ; base high
   .data: equ $ - gdt64
   dw 0                         ; limit low
   dw 0                         ; base low
   db 0                         ; base middle
-  db 10010010b                 ; access
-  db 00000000b                 ; granularity
+  db 10010010b                 ; access (present, read, write)
+  db 0                         ; granularity
   db 0                         ; base high
   .pointer:
-  dw $ - gdt64 - 1             ; limit
-  dq gdt64                     ; base
+  dw $ - gdt64 - 1             ; limit (size - 1)
+  dq gdt64                     ; base (offset)
