@@ -103,4 +103,7 @@ setup_hh_tables:
   cmp rcx, 0 ; check if done
   jne .init_hh_tables
   ret
-  
+
+; kernel calls this from c
+idt_load:
+  mov ax, [esp]

@@ -187,7 +187,7 @@ kp2_table:
 
 ; some space for the stack
 stack_bottom:
-  resb 64
+  resb 4096 ; 4KiB stack
 stack_top:
 
 
